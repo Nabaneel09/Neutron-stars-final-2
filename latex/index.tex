@@ -1,0 +1,19 @@
+\chapter{RLOF (2009) Piecewise-\/\+Polytropic Replication}
+\hypertarget{index}{}\label{index}\index{RLOF (2009) Piecewise-\/Polytropic Replication@{RLOF (2009) Piecewise-\/Polytropic Replication}}
+\hypertarget{index_overview}{}\doxysection{\texorpdfstring{Driver overview}{Driver overview}}\label{index_overview}
+The executable section below\+:
+\begin{DoxyEnumerate}
+\item iterates over the RLOF Table III fit parameters,
+\item builds a piecewise-\/polytropic EOS for each entry,
+\item solves the TOV equations across a log-\/spaced central-\/density scan,
+\item extracts the three Table II observables  $(M_{\max},\,R_{1.4},\,
+     R(M_{\max}))$,
+\item prints a side-\/by-\/side comparison with the published Table II values, and
+\item writes an overlaid mass-\/radius figure (analogue of RLOF Fig. 5) to {\ttfamily figures/rlof2009\+\_\+mass\+\_\+radius.\{pdf,png\}}.
+\end{DoxyEnumerate}\hypertarget{index_run}{}\doxysection{\texorpdfstring{How to run}{How to run}}\label{index_run}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ replicate\_read2009.py}
+
+\end{DoxyCode}
+ 

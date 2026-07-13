@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "NeutronStarProject: Numerical Solution of the Tolman-Oppenheimer-Volkoff Equations"
+type: software
+authors:
+  - family-names: "Computational Nuclear Physics Project"
+    affiliation: "University of Bologna"
+version: 1.0.0
+date-released: 2026-07-08
+license: MIT
+keywords:
+  - neutron stars
+  - TOV equations
+  - general relativity
+  - equation of state
+  - computational physics
+references:
+  - type: article
+    authors:
+      - family-names: Oppenheimer
+        given-names: J. R.
+      - family-names: Volkoff
+        given-names: G. M.
+    title: "On Massive Neutron Cores"
+    journal: "Physical Review"
+    volume: 55
+    start: 374
+    year: 1939
+    doi: 10.1103/PhysRev.55.374

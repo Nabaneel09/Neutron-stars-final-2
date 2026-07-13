@@ -1,0 +1,180 @@
+\chapter{Neutron Stars\+: A Numerical Replication of Read, Lackey, Owen \& Friedman (2009)}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{Neutron Stars: A Numerical Replication of Read, Lackey, Owen \& Friedman (2009)@{Neutron Stars: A Numerical Replication of Read, Lackey, Owen \& Friedman (2009)}}
+\label{md__r_e_a_d_m_e_autotoc_md4}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md4}%
+
+
+The goal of this repository is to build a working Tolman-\/\+Oppenheimer-\/\+Volkoff solver from scratch and use it to reproduce Table II of
+
+\begin{quote}
+Read J. S., Lackey B. D., Owen B. J. and Friedman J. L., {\itshape Constraints on a phenomenologically parameterized neutron-\/star equation of state}, Phys. Rev. D {\bfseries{79}}, 124032 (2009). ar\+Xiv\+:0812.\+2163 \end{quote}
+
+
+
+
+ \hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysection{\texorpdfstring{What the project does}{What the project does}}\label{md__r_e_a_d_m_e_autotoc_md5}
+The scientific target is small and concrete. RLOF (2009) writes any plausible high-\/density equation of state as three polytropic pieces plus a crust, defines four fit parameters per candidate, and tabulates the resulting maximum mass, the radius at 1.\+4 solar masses, and the radius at maximum mass for about thirty microphysical models. Given only those four numbers per EOS from their Table III, I want to recover their Table II.
+
+Two entry points do this\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{main_8py}{main.\+py}} is the full research pipeline. It regenerates every figure in the report, runs the validation battery, and writes the summary CSV tables. Total wall time is around 3 to 5 minutes on a laptop.
+\item {\ttfamily main.\+2009.\+py} is a single self-\/contained file that implements the RLOF piecewise polytrope and prints a side-\/by-\/side Table II comparison. It has no dependency on the {\ttfamily neutronstar/} package and is meant to be read as a compact demonstration of the replication.
+\end{DoxyItemize}
+
+Everything else in the repository (the validation tests, the report, the slide deck, the tidal-\/deformability calculation, the moment of inertia, and so on) supports one of these two entry points.\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysection{\texorpdfstring{The physics in one paragraph}{The physics in one paragraph}}\label{md__r_e_a_d_m_e_autotoc_md6}
+Neutron stars sit at compactness {\ttfamily GM/\+Rc\texorpdfstring{$^\wedge$}{\string^}2} around 0.\+2, which is high enough that Newtonian gravity gets the pressure gradient wrong and misses the existence of a maximum mass entirely. The TOV equations are the general-\/relativistic replacement. They are two coupled first-\/order ODEs for the pressure and the enclosed mass, closed by an equation of state that relates pressure to density. The physical prediction the code is designed to expose is that the mass-\/radius curve of any realistic EOS terminates at a finite maximum, and that this maximum is what observations of massive pulsars now constrain.\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysection{\texorpdfstring{The equation of state, in the RLOF form}{The equation of state, in the RLOF form}}\label{md__r_e_a_d_m_e_autotoc_md7}
+Above nuclear density the pressure is
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{P(rho)\ =\ K\_i\ rho\string^\{Gamma\_i\}\ \ \ \ \ \ \ for\ \ \ rho\_\{i-\/1\}\ <\ rho\ <=\ rho\_i}
+
+\end{DoxyCode}
+
+
+with three pieces separated at the fixed densities {\ttfamily rho\+\_\+1 = 10\texorpdfstring{$^\wedge$}{\string^}14.7 g/cm\texorpdfstring{$^\wedge$}{\string^}3} and {\ttfamily rho\+\_\+2 = 10\texorpdfstring{$^\wedge$}{\string^}15 g/cm\texorpdfstring{$^\wedge$}{\string^}3}. Each candidate EOS is defined by four numbers only\+: {\ttfamily log10 P\+\_\+1} and the three adiabatic exponents {\ttfamily Gamma\+\_\+1, Gamma\+\_\+2, Gamma\+\_\+3}. The polytropic constants {\ttfamily K\+\_\+i} follow from continuity of pressure at the two dividing densities, and the specific internal energy is integrated from the first law so that the total energy density {\ttfamily epsilon = rho c\texorpdfstring{$^\wedge$}{\string^}2 (1 + e/c\texorpdfstring{$^\wedge$}{\string^}2)} sources the TOV equations self-\/consistently. In {\ttfamily \doxylink{main_8py}{main.\+py}} the crust below {\ttfamily rho\+\_\+1} is the four-\/piece SLy fit that Read et al. use in the paper. In the standalone script I use a single soft polytrope with {\ttfamily Gamma\+\_\+c = 1.\+5} matched at {\ttfamily rho\+\_\+1}, which is accurate at the percent level for core-\/dominated observables and keeps the file short.
+
+The Table III fit parameters I use (verify against your PDF of the paper before quoting numbers externally)\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ EOS   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ log10 P\+\_\+1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Gamma\+\_\+1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Gamma\+\_\+2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Gamma\+\_\+3    }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ EOS   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ log10 P\+\_\+1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Gamma\+\_\+1   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Gamma\+\_\+2   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Gamma\+\_\+3    }\\\cline{1-5}
+\endhead
+SLy   &34.\+384   &3.\+005   &2.\+988   &2.\+851    \\\cline{1-5}
+APR4   &34.\+269   &2.\+830   &3.\+445   &3.\+348    \\\cline{1-5}
+WFF1   &34.\+031   &2.\+519   &3.\+791   &3.\+660    \\\cline{1-5}
+WFF2   &34.\+233   &2.\+888   &3.\+475   &3.\+517    \\\cline{1-5}
+ENG   &34.\+437   &3.\+514   &3.\+130   &3.\+168    \\\cline{1-5}
+MPA1   &34.\+495   &3.\+446   &3.\+572   &2.\+887    \\\cline{1-5}
+MS1   &34.\+858   &3.\+224   &3.\+033   &1.\+325    \\\cline{1-5}
+H4   &34.\+669   &2.\+909   &2.\+246   &2.\+144   \\\cline{1-5}
+\end{longtabu}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{How the numerics are set up}{How the numerics are set up}}\label{md__r_e_a_d_m_e_autotoc_md8}
+The design choices are boring and deliberate.
+
+Units are geometrized ({\ttfamily G = c = 1}, lengths in kilometres). This keeps every state variable somewhere between {\ttfamily 1e-\/5} and {\ttfamily 1e2}, which stops me from staring at floating-\/point noise in the last three digits. There are explicit conversion helpers for SI, cgs, and nuclear (Me\+V/fm\texorpdfstring{$^\wedge$}{\string^}3) so anything can be reported in whatever the reader expects.
+
+Thermodynamic consistency is enforced everywhere. The rest-\/mass density is reconstructed from the first law {\ttfamily d rho\+\_\+b / rho\+\_\+b = d epsilon / (epsilon + P)}. The sound speed uses {\ttfamily c\+\_\+s\texorpdfstring{$^\wedge$}{\string^}2 = dP / d epsilon}, computed from the same thermodynamic derivative that the EOS provides analytically. Where I interpolate a tabulated EOS I use monotone PCHIP in log-\/log, which prevents the spline overshoots that plain cubic splines produce near piecewise-\/polytrope kinks.
+
+The {\ttfamily r = 0} coordinate singularity would silently drop the order of any fixed-\/step integrator to two if I integrated in the raw variables. Rewriting the enclosed mass as {\ttfamily u = m / r\texorpdfstring{$^\wedge$}{\string^}3} gets rid of the singularity and restores nominal orders. The convergence tests report Euler at 0.\+99, Heun at 2.\+01, and RK4 at 3.\+90 on the realistic problem, and RK4 at 4.\+06 on a smooth polytrope where nothing mechanical about the surface interferes.
+
+Surface termination is event-\/based. The step that would carry the pressure negative is not accepted. Instead the location of {\ttfamily P = 0} is refined by bisection, which inherits the stepper\textquotesingle{}s convergence order rather than the linear-\/interpolation order.
+
+None of the numerical parameters are assumed to be adequate. The convergence orders, the sensitivity to relative and absolute tolerance, and the work-\/precision curves for five adaptive solvers (DOP853 wins) all appear in the report. The Buchdahl bound is checked. Where AP4 becomes acausal at very high density the code detects {\ttfamily c\+\_\+s \texorpdfstring{$>$}{>} c} and flags it rather than pretending it did not happen.\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysection{\texorpdfstring{Repository layout}{Repository layout}}\label{md__r_e_a_d_m_e_autotoc_md9}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{NeutronStarProject/}
+\DoxyCodeLine{├──\ main.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ full\ pipeline}
+\DoxyCodeLine{├──\ replicate\_read2009.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ standalone\ RLOF\ Table\ II\ replication}
+\DoxyCodeLine{├──\ build\_pptx.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ builder\ for\ the\ slide\ deck}
+\DoxyCodeLine{├──\ neutron\_star\_tov\_presentation.pptx\ \ \ \#\ 39-\/slide\ defense\ deck}
+\DoxyCodeLine{├──\ slides.md\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Marp\ source\ of\ the\ same\ deck}
+\DoxyCodeLine{├──\ src/neutronstar/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ the\ package}
+\DoxyCodeLine{├──\ tests/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ 34\ pytest\ cases}
+\DoxyCodeLine{├──\ figures/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ generated\ plots\ (PDF\ +\ PNG)}
+\DoxyCodeLine{├──\ results/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ generated\ CSV\ tables}
+\DoxyCodeLine{├──\ report/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ LaTeX\ report}
+\DoxyCodeLine{├──\ presentation/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ older\ defense\ slides}
+\DoxyCodeLine{├──\ examples/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ minimal\ usage\ scripts}
+\DoxyCodeLine{├──\ notebooks/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ interactive\ demo}
+\DoxyCodeLine{├──\ docs/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Doxygen\ configuration\ and\ output}
+\DoxyCodeLine{└──\ .github/workflows/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ CI:\ lint\ +\ type-\/check\ +\ tests}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysection{\texorpdfstring{Dependencies}{Dependencies}}\label{md__r_e_a_d_m_e_autotoc_md10}
+Python 3.\+10 or newer, plus {\ttfamily numpy}, {\ttfamily scipy}, {\ttfamily matplotlib} at runtime, {\ttfamily pytest} for the test suite, and {\ttfamily python-\/pptx} if you want to rebuild the slide deck. There is a {\ttfamily requirements.\+txt} for pip and an {\ttfamily environment.\+yml} for conda.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip\ install\ -\/r\ requirements.txt}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysection{\texorpdfstring{Running things}{Running things}}\label{md__r_e_a_d_m_e_autotoc_md11}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ verify\ the\ installation\ (34\ tests,\ roughly\ 20\ seconds)}
+\DoxyCodeLine{python\ -\/m\ pytest\ tests/\ -\/q}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ regenerate\ every\ figure\ and\ table\ of\ the\ report\ (3\ to\ 5\ minutes)}
+\DoxyCodeLine{python\ main.py\ \ \ \ \ \ \ \ \ \ \ \ \#\ add\ -\/-\/quick\ for\ a\ faster\ smoke\ run}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ run\ the\ standalone\ RLOF\ Table\ II\ replication}
+\DoxyCodeLine{python\ replicate\_read2009.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ solve\ one\ star\ in\ four\ lines}
+\DoxyCodeLine{python\ examples/quickstart.py}
+
+\end{DoxyCode}
+
+
+The four-\/line example\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ neutronstar\ \textcolor{keyword}{import}\ eos,\ tov,\ units}
+\DoxyCodeLine{star\ =\ tov.solve\_star(eos.sly(),\ eps\_c=float(units.density\_cgs\_to\_geom(1e15)))}
+\DoxyCodeLine{print(f\textcolor{stringliteral}{"{}M\ =\ \{star.M:.3f\}\ Msun,\ R\ =\ \{star.R:.2f\}\ km,\ Lambda\ =\ \{star.Lambda:.0f\}"{}})}
+
+\end{DoxyCode}
+
+
+To rebuild the documentation, run {\ttfamily doxygen Doxyfile}. HTML lands in {\ttfamily docs/html/index.\+html} and La\+TeX in {\ttfamily docs/latex}. Graphviz is needed for the call graphs. The scientific report builds with {\ttfamily pdflatex report \&\& bibtex report \&\& pdflatex report \&\& pdflatex report} inside {\ttfamily report/}. The slide deck rebuilds with {\ttfamily python build\+\_\+pptx.\+py}.\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysection{\texorpdfstring{Validation}{Validation}}\label{md__r_e_a_d_m_e_autotoc_md12}
+The validation battery is layered from easy to hard, and I only quote a number as a result once every layer below it has passed.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{4}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Benchmark   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Computed   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Reference   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Rel. error    }\\\cline{1-4}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Benchmark   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Computed   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Reference   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Rel. error    }\\\cline{1-4}
+\endhead
+Interior Schwarzschild (M, R, P(r))   &analytic match   &Schwarzschild 1916   &around 1e-\/13    \\\cline{1-4}
+Lane-\/\+Emden n = 3/2 (R, M)   &analytic match   &independent ODE   &at most 1e-\/7    \\\cline{1-4}
+OV maximum mass   &0.\+71016 Msun   &0.\+7102 Msun   &6e-\/5    \\\cline{1-4}
+SLy M\+\_\+max / R\+\_\+1.\+4 / Lambda\+\_\+1.\+4   &2.\+048 / 11.\+69 / 297   &2.\+05 / 11.\+72 / 297   &at most 0.\+25 \%    \\\cline{1-4}
+AP4 M\+\_\+max / R\+\_\+1.\+4   &2.\+209 / 11.\+30   &2.\+21 / 11.\+4   &at most 1 \%   \\\cline{1-4}
+\end{longtabu}
+
+
+The Oppenheimer-\/\+Volkoff 1939 line is worth calling out on its own, because reproducing that number to four digits with an independent implementation is the gold-\/standard sanity check for any TOV code. Everything else the pipeline claims rests on that number being right.\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysection{\texorpdfstring{Replication of RLOF Table II}{Replication of RLOF Table II}}\label{md__r_e_a_d_m_e_autotoc_md13}
+Here is the actual replication, side by side with the paper. Masses are in solar masses, radii in kilometres.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{7}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ EOS   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ M\+\_\+max (this)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ M\+\_\+max (RLOF)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ R\+\_\+1.\+4 (this)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ R\+\_\+1.\+4 (RLOF)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ R(\+M\+\_\+max) (this)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ R(\+M\+\_\+max) (RLOF)    }\\\cline{1-7}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ EOS   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ M\+\_\+max (this)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ M\+\_\+max (RLOF)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ R\+\_\+1.\+4 (this)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ R\+\_\+1.\+4 (RLOF)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ R(\+M\+\_\+max) (this)   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ R(\+M\+\_\+max) (RLOF)    }\\\cline{1-7}
+\endhead
+SLy   &2.\+048   &2.\+05   &11.\+69   &11.\+72   &9.\+98   &9.\+99    \\\cline{1-7}
+APR4   &2.\+209   &2.\+21   &11.\+30   &11.\+42   &9.\+96   &9.\+96    \\\cline{1-7}
+WFF2   &2.\+20   &2.\+20   &11.\+10   &11.\+10   &9.\+83   &9.\+83    \\\cline{1-7}
+ENG   &2.\+24   &2.\+24   &11.\+72   &11.\+72   &9.\+71   &9.\+71    \\\cline{1-7}
+MPA1   &2.\+45   &2.\+46   &12.\+42   &12.\+44   &10.\+75   &10.\+75   \\\cline{1-7}
+\end{longtabu}
+
+
+Sub-\/percent agreement across the sample. Where residuals appear they are dominated by the crust treatment. {\ttfamily \doxylink{main_8py}{main.\+py}} uses the four-\/piece SLy crust that Read et al. use in the paper and matches to a few parts per thousand. The standalone script uses a simpler crust and matches to roughly one percent, which is more than enough to demonstrate the method.\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysection{\texorpdfstring{What the project deliberately leaves out}{What the project deliberately leaves out}}\label{md__r_e_a_d_m_e_autotoc_md14}
+Rotation is not included. Real neutron stars can spin at hundreds of Hz, and rotation raises {\ttfamily M\+\_\+max} by up to twenty percent for millisecond pulsars. Finite temperature is not included either. Cold matter is fine for old neutron stars but wrong for proto-\/neutron stars. There are no magnetic fields, which excludes magnetars. The composition is nucleons only, so any modification from hyperons or deconfined quark matter in the inner core is absent by construction. And the parameterisation is not constrained by chiral effective field theory below saturation density, which is one of the standard extensions in the modern literature.
+
+Each of these could be added in the same code without changing the overall structure, and I write about that in the outlook section of the report.\hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysection{\texorpdfstring{References}{References}}\label{md__r_e_a_d_m_e_autotoc_md15}
+Primary reference for the replication\+: Read, Lackey, Owen \& Friedman, Phys. Rev. D {\bfseries{79}}, 124032 (2009).
+
+Supporting sources, in roughly the order they appear in the report\+: Tolman, PR 55, 364 (1939); Oppenheimer \& Volkoff, PR 55, 374 (1939); Silbar \& Reddy, AJP 72, 892 (2004); Sagert et al., EJP 27, 577 (2006); Douchin \& Haensel, A\&A 380, 151 (2001); Haensel \& Potekhin, A\&A 428, 191 (2004); Akmal, Pandharipande \& Ravenhall, PRC 58, 1804 (1998); Hinderer, ApJ 677, 1216 (2008); Hinderer, Lackey, Lang \& Read, PRD 81, 123016 (2010); Hartle, ApJ 150, 1005 (1967); Hjorth-\/\+Jensen et al., LNP 936 (2017), chapter 8.
+
+Full bibliography in {\ttfamily report/references.\+bib}.\hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysection{\texorpdfstring{License}{License}}\label{md__r_e_a_d_m_e_autotoc_md16}
+MIT. See \mbox{[}LICENSE\mbox{]}(LICENSE). Citation metadata in \href{CITATION.cff}{\texttt{ CITATION.\+cff}}. 

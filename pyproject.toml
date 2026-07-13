@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neutronstar"
+version = "1.0.0"
+description = "Numerical solution of the Tolman-Oppenheimer-Volkoff equations"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["numpy>=1.24", "scipy>=1.10", "matplotlib>=3.7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "black>=24.0", "ruff>=0.4", "mypy>=1.8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 95
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "NPY", "B"]
+ignore = ["E741"]  # ambiguous variable names: physics notation (l, I)
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true   # scipy has no complete stubs
+warn_unused_ignores = true
+no_implicit_optional = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,235 @@
+\doxysection{main.\+RLOFPolytrope Class Reference}
+\hypertarget{classmain_1_1_r_l_o_f_polytrope}{}\label{classmain_1_1_r_l_o_f_polytrope}\index{main.RLOFPolytrope@{main.RLOFPolytrope}}
+
+
+Four-\/parameter piecewise-\/polytropic EOS of Read-\/\+Lackey-\/\+Owen-\/\+Friedman (2009), Section II B.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmain_1_1_r_l_o_f_polytrope_a63ae50b362411017254a93adc642ac2a}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, float log\+P1, float G1, float G2, float G3)
+\begin{DoxyCompactList}\small\item\em Construct a piecewise-\/polytropic EOS from the four RLOF fit parameters. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classmain_1_1_r_l_o_f_polytrope_a8295a8dac58d72566beeebf5fe81bc61}{P\+\_\+of\+\_\+rho}} (self, float rho)
+\begin{DoxyCompactList}\small\item\em Forward EOS\+: pressure as a function of rest-\/mass density. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classmain_1_1_r_l_o_f_polytrope_a63759ad16dfdfde2888f5411960f9d53}{rho\+\_\+of\+\_\+P}} (self, float P)
+\begin{DoxyCompactList}\small\item\em Inverse EOS\+: rest-\/mass density as a function of pressure. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classmain_1_1_r_l_o_f_polytrope_a42d51089e2b2ac223fc8ffcbd704e33d}{epsilon\+\_\+of\+\_\+rho}} (self, float rho)
+\begin{DoxyCompactList}\small\item\em Total energy density (rest + first-\/law internal energy). \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classmain_1_1_r_l_o_f_polytrope_ad414a41daee3e7f4ed7131c867f708cd}{rho\+\_\+grav}} (self, float P)
+\begin{DoxyCompactList}\small\item\em Mass-\/equivalent gravitational energy density, i.\+e. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a1c745da990a2fca15a741ffaad19a51a}\label{classmain_1_1_r_l_o_f_polytrope_a1c745da990a2fca15a741ffaad19a51a} 
+{\bfseries log\+P1} = log\+P1
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_aee8f99941a1df56b0cb23fb730206c85}\label{classmain_1_1_r_l_o_f_polytrope_aee8f99941a1df56b0cb23fb730206c85} 
+{\bfseries G1}
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a4e2191600a13388a7c629a73bb777e39}\label{classmain_1_1_r_l_o_f_polytrope_a4e2191600a13388a7c629a73bb777e39} 
+{\bfseries G2}
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a07453f59c79d58b1f0d8077788f83ab9}\label{classmain_1_1_r_l_o_f_polytrope_a07453f59c79d58b1f0d8077788f83ab9} 
+{\bfseries G3} = G1, G2, G3
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_ad8a9dd869f48afacf52788d5f99a2ef5}\label{classmain_1_1_r_l_o_f_polytrope_ad8a9dd869f48afacf52788d5f99a2ef5} 
+float {\bfseries P1} = 10.\+0\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}log\+P1
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_ae09d682d9c7d55785c330dd656ace872}\label{classmain_1_1_r_l_o_f_polytrope_ae09d682d9c7d55785c330dd656ace872} 
+float {\bfseries K1} = self.\+P1 / RHO\+\_\+1\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}G1
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_aaf608857a7dc3aa9c0c1f0937c6d8d6d}\label{classmain_1_1_r_l_o_f_polytrope_aaf608857a7dc3aa9c0c1f0937c6d8d6d} 
+float {\bfseries K2} = self.\+P1 / RHO\+\_\+1\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}G2
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a529c6a3dbdb47d019ebcd6b7cc14d981}\label{classmain_1_1_r_l_o_f_polytrope_a529c6a3dbdb47d019ebcd6b7cc14d981} 
+float {\bfseries P2} = self.\+K2 \texorpdfstring{$\ast$}{*} RHO\+\_\+2\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}G2
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_acf53b85bebb11d41e07138839cf98212}\label{classmain_1_1_r_l_o_f_polytrope_acf53b85bebb11d41e07138839cf98212} 
+float {\bfseries K3} = self.\+P2 / RHO\+\_\+2\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}G3
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a8231e4d0e10f2c3e5c862b0b26b850df}\label{classmain_1_1_r_l_o_f_polytrope_a8231e4d0e10f2c3e5c862b0b26b850df} 
+float {\bfseries Kc} = self.\+P1 / RHO\+\_\+1\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}self.\+GAMMA\+\_\+\+CRUST
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a6f290d10adaf80959fa77bb738ea6d91}\label{classmain_1_1_r_l_o_f_polytrope_a6f290d10adaf80959fa77bb738ea6d91} 
+float {\bfseries GAMMA\+\_\+\+CRUST} = 1.\+5
+\begin{DoxyCompactList}\small\item\em Softened toy-\/crust polytropic exponent (see file-\/level note). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_ac2ddd18968bb4f6a9fa5b0ac48b37c36}\label{classmain_1_1_r_l_o_f_polytrope_ac2ddd18968bb4f6a9fa5b0ac48b37c36} 
+float {\bfseries \+\_\+\+Cc} = 0.\+0
+\begin{DoxyCompactList}\small\item\em \texorpdfstring{$<$}{<} crust anchor \end{DoxyCompactList}\item 
+tuple \mbox{\hyperlink{classmain_1_1_r_l_o_f_polytrope_a81b1b4b25fe53f958b091dde7c7376b8}{\+\_\+\+C1}}
+\item 
+tuple \mbox{\hyperlink{classmain_1_1_r_l_o_f_polytrope_ad67d5c5a70219eb94f2c0b49438a1a4e}{\+\_\+\+C2}}
+\item 
+tuple \mbox{\hyperlink{classmain_1_1_r_l_o_f_polytrope_a298db154e4058da19b7bfee2080316fc}{\+\_\+\+C3}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Four-\/parameter piecewise-\/polytropic EOS of Read-\/\+Lackey-\/\+Owen-\/\+Friedman (2009), Section II B. 
+
+Encodes the three-\/piece polytropic core plus a simplified soft crust and provides the forward map $P(\rho)$, the inverse map $\rho(P)$, and the first-\/law-\/consistent total energy density $\varepsilon(\rho)$ needed by the TOV integrator.
+
+The three core pieces obey   \[             P = K_i\,\rho^{\Gamma_i}
+\] on
+\begin{DoxyItemize}
+\item piece 1\+: $\rho_{cc} < \rho \le \rho_1$ with $\Gamma_1$,
+\item piece 2\+: $\rho_1 < \rho \le \rho_2$ with $\Gamma_2$,
+\item piece 3\+: $\rho > \rho_2$ with $\Gamma_3$. The $K_i$ are fixed by continuity of $P$ at each boundary together with $P(\rho_1)=P_1$.
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+The specific internal energy $e(\rho)$ is obtained from the first law $de = -P\,d(1/\rho)$ so that $\varepsilon = \rho c^{2} + \rho e$ enters the TOV equations self-\/consistently. This \texorpdfstring{$\sim$}{\string~}10 \% correction is what shifts $M_{\max}$ from its Newtonian value to the observed neutron-\/star scale. 
+\end{DoxyNote}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a63ae50b362411017254a93adc642ac2a}\index{main.RLOFPolytrope@{main.RLOFPolytrope}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!main.RLOFPolytrope@{main.RLOFPolytrope}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classmain_1_1_r_l_o_f_polytrope_a63ae50b362411017254a93adc642ac2a} 
+main.\+RLOFPolytrope.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{log\+P1}{, }\item[{float}]{G1}{, }\item[{float}]{G2}{, }\item[{float}]{G3}{}\end{DoxyParamCaption})}
+
+
+
+Construct a piecewise-\/polytropic EOS from the four RLOF fit parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em log\+P1} & $\log_{10}(P_1/[\mathrm{dyn\,cm^{-2}}])$\+: pressure at $\rho_1 = 10^{14.7}$ g/cm\texorpdfstring{$^\wedge$}{\string^}3. \\
+\hline
+{\em G1} & Adiabatic index $\Gamma_1$ of the outer core. \\
+\hline
+{\em G2} & Adiabatic index $\Gamma_2$ of the intermediate core. \\
+\hline
+{\em G3} & Adiabatic index $\Gamma_3$ of the inner core.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+All polytropic constants $K_i$ and the internal-\/energy anchor constants $C_i$ are precomputed once at construction time; forward/inverse lookups are then $\mathcal{O}(1)$. 
+\end{DoxyPostcond}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a42d51089e2b2ac223fc8ffcbd704e33d}\index{main.RLOFPolytrope@{main.RLOFPolytrope}!epsilon\_of\_rho@{epsilon\_of\_rho}}
+\index{epsilon\_of\_rho@{epsilon\_of\_rho}!main.RLOFPolytrope@{main.RLOFPolytrope}}
+\doxysubsubsection{\texorpdfstring{epsilon\_of\_rho()}{epsilon\_of\_rho()}}
+{\footnotesize\ttfamily \label{classmain_1_1_r_l_o_f_polytrope_a42d51089e2b2ac223fc8ffcbd704e33d} 
+ float main.\+RLOFPolytrope.\+epsilon\+\_\+of\+\_\+rho (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{rho}{}\end{DoxyParamCaption})}
+
+
+
+Total energy density (rest + first-\/law internal energy). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rho} & Rest-\/mass density \mbox{[}g cm\texorpdfstring{$^\wedge$}{\string^}-\/3\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\varepsilon(\rho) = \rho c^{2}(1+e/c^{2})$ \mbox{[}erg cm\texorpdfstring{$^\wedge$}{\string^}-\/3\mbox{]}. 
+\end{DoxyReturn}
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a8295a8dac58d72566beeebf5fe81bc61}\index{main.RLOFPolytrope@{main.RLOFPolytrope}!P\_of\_rho@{P\_of\_rho}}
+\index{P\_of\_rho@{P\_of\_rho}!main.RLOFPolytrope@{main.RLOFPolytrope}}
+\doxysubsubsection{\texorpdfstring{P\_of\_rho()}{P\_of\_rho()}}
+{\footnotesize\ttfamily \label{classmain_1_1_r_l_o_f_polytrope_a8295a8dac58d72566beeebf5fe81bc61} 
+ float main.\+RLOFPolytrope.\+P\+\_\+of\+\_\+rho (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{rho}{}\end{DoxyParamCaption})}
+
+
+
+Forward EOS\+: pressure as a function of rest-\/mass density. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rho} & Rest-\/mass density \mbox{[}g cm\texorpdfstring{$^\wedge$}{\string^}-\/3\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pressure $P(\rho)$ \mbox{[}dyn cm\texorpdfstring{$^\wedge$}{\string^}-\/2\mbox{]}. 
+\end{DoxyReturn}
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_ad414a41daee3e7f4ed7131c867f708cd}\index{main.RLOFPolytrope@{main.RLOFPolytrope}!rho\_grav@{rho\_grav}}
+\index{rho\_grav@{rho\_grav}!main.RLOFPolytrope@{main.RLOFPolytrope}}
+\doxysubsubsection{\texorpdfstring{rho\_grav()}{rho\_grav()}}
+{\footnotesize\ttfamily \label{classmain_1_1_r_l_o_f_polytrope_ad414a41daee3e7f4ed7131c867f708cd} 
+ float main.\+RLOFPolytrope.\+rho\+\_\+grav (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{P}{}\end{DoxyParamCaption})}
+
+
+
+Mass-\/equivalent gravitational energy density, i.\+e. 
+
+the quantity that appears on the right-\/hand side of the TOV equations. 
+\begin{DoxyParams}{Parameters}
+{\em P} & Pressure \mbox{[}dyn cm\texorpdfstring{$^\wedge$}{\string^}-\/2\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$\varepsilon(P)/c^{2}$ \mbox{[}g cm\texorpdfstring{$^\wedge$}{\string^}-\/3\mbox{]}. 
+\end{DoxyReturn}
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a63759ad16dfdfde2888f5411960f9d53}\index{main.RLOFPolytrope@{main.RLOFPolytrope}!rho\_of\_P@{rho\_of\_P}}
+\index{rho\_of\_P@{rho\_of\_P}!main.RLOFPolytrope@{main.RLOFPolytrope}}
+\doxysubsubsection{\texorpdfstring{rho\_of\_P()}{rho\_of\_P()}}
+{\footnotesize\ttfamily \label{classmain_1_1_r_l_o_f_polytrope_a63759ad16dfdfde2888f5411960f9d53} 
+ float main.\+RLOFPolytrope.\+rho\+\_\+of\+\_\+P (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{P}{}\end{DoxyParamCaption})}
+
+
+
+Inverse EOS\+: rest-\/mass density as a function of pressure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em P} & Pressure \mbox{[}dyn cm\texorpdfstring{$^\wedge$}{\string^}-\/2\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Rest-\/mass density $\rho(P)$ \mbox{[}g cm\texorpdfstring{$^\wedge$}{\string^}-\/3\mbox{]}; zero if $P\le 0$. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a81b1b4b25fe53f958b091dde7c7376b8}\index{main.RLOFPolytrope@{main.RLOFPolytrope}!\_C1@{\_C1}}
+\index{\_C1@{\_C1}!main.RLOFPolytrope@{main.RLOFPolytrope}}
+\doxysubsubsection{\texorpdfstring{\_C1}{\_C1}}
+{\footnotesize\ttfamily \label{classmain_1_1_r_l_o_f_polytrope_a81b1b4b25fe53f958b091dde7c7376b8} 
+tuple main.\+RLOFPolytrope.\+\_\+\+C1\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ (e\_at\_rho1\_crust}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ self.K1\ /\ (G1\ -\/\ 1.0)\ *\ RHO\_1**(G1\ -\/\ 1.0))}
+
+\end{DoxyCode}
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_ad67d5c5a70219eb94f2c0b49438a1a4e}\index{main.RLOFPolytrope@{main.RLOFPolytrope}!\_C2@{\_C2}}
+\index{\_C2@{\_C2}!main.RLOFPolytrope@{main.RLOFPolytrope}}
+\doxysubsubsection{\texorpdfstring{\_C2}{\_C2}}
+{\footnotesize\ttfamily \label{classmain_1_1_r_l_o_f_polytrope_ad67d5c5a70219eb94f2c0b49438a1a4e} 
+tuple main.\+RLOFPolytrope.\+\_\+\+C2\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ (e\_at\_rho1\_p1}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ self.K2\ /\ (G2\ -\/\ 1.0)\ *\ RHO\_1**(G2\ -\/\ 1.0))}
+
+\end{DoxyCode}
+\Hypertarget{classmain_1_1_r_l_o_f_polytrope_a298db154e4058da19b7bfee2080316fc}\index{main.RLOFPolytrope@{main.RLOFPolytrope}!\_C3@{\_C3}}
+\index{\_C3@{\_C3}!main.RLOFPolytrope@{main.RLOFPolytrope}}
+\doxysubsubsection{\texorpdfstring{\_C3}{\_C3}}
+{\footnotesize\ttfamily \label{classmain_1_1_r_l_o_f_polytrope_a298db154e4058da19b7bfee2080316fc} 
+tuple main.\+RLOFPolytrope.\+\_\+\+C3\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ (e\_at\_rho2\_p2}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ self.K3\ /\ (G3\ -\/\ 1.0)\ *\ RHO\_2**(G3\ -\/\ 1.0))}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+main. 2009.\+py\end{DoxyCompactItemize}

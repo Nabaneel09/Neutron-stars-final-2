@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# LaTeX intermediates
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.bbl
+report/*.blg
+report/*.synctex.gz
+
+# Doxygen output (regenerable)
+docs/html/
+docs/latex/
+
+# large regenerable outputs are kept in git for the course hand-in;
+# uncomment to exclude:
+# figures/
+# results/

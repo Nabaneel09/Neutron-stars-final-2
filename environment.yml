@@ -1,0 +1,14 @@
+name: neutronstar
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - numpy>=1.24
+  - scipy>=1.10
+  - matplotlib>=3.7
+  - pytest>=7.0
+  - black
+  - ruff
+  - mypy
+  - doxygen        # API documentation (optional)
+  - graphviz       # Doxygen call/dependency graphs (optional)
